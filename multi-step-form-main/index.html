@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Multi-step form</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+  <script defer src="main-script.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main>
+    <div class="sidebar">
+      <!-- Sidebar start -->
+      <div class="sidebar-step">
+        <div id="sidebar-step-1" class="sidebar-step--number active">1</div>
+        <div class="sidebar-step--details">
+          <div>Step 1</div>
+          <div>YOUR INFO</div>
+        </div>
+      </div>
+      <div class="sidebar-step">
+        <div id="sidebar-step-2" class="sidebar-step--number">2</div>
+        <div class="sidebar-step--details">
+          <div>Step 2</div>
+          <div>SELECT PLAN</div>
+        </div>
+      </div>
+      <div class="sidebar-step">
+        <div id="sidebar-step-3" class="sidebar-step--number">3</div>
+        <div class="sidebar-step--details">
+          <div>Step 3</div>
+          <div>ADD-ONS</div>
+        </div>
+      </div>
+      <div class="sidebar-step">
+        <div id="sidebar-step-4" class="sidebar-step--number">4</div>
+        <div class="sidebar-step--details">
+          <div>Step 4</div>
+          <div>SUMMARY</div>
+        </div>
+      </div>
+    </div>
+    <div class="step-content">
+      <div class="step-details" id="step-content-1">
+        <header class="step-content__header">
+          <h2>Personal info</h2>
+          <div class="step-content__header-description">Please provide your name, email address, and phone number.</div>
+        </header>
+        <div class="step-content__content">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="e.g. Stephen King" onfocus="removeError.call(this)">
+          <div class="error-msg" id="name-error"></div>
+          <br />
+          <label for="email">Email Address</label>
+          <input type="text" id="email" placeholder="e.g. stephenking@lorem.com" onfocus="removeError.call(this)">
+          <div class="error-msg" id="email-error"></div>
+          <br />
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone" placeholder="e.g. +1 234 567 890" onfocus="removeError.call(this)">
+          <div class="error-msg" id="phone-error"></div>
+          <br />
+          <div class="footer-nav">
+            <button class="next-button" onclick="nextStep(1)">Next Step</button>
+          </div>
+        </div>
+      </div>
+      <div class="step-details inactive" id="step-content-2">
+        <header class="step-content__header">
+          <h2>Select your plan</h2>
+          <div class="step-content__header-description">You have the option of monthly or yearly billing.</div>
+        </header>
+        <div class="step-content-2__content">
+          <div class="plans">
+            <div id="plan-1" class="plan">
+              <img src="./assets/images/icon-arcade.svg" alt="arcade">
+              <div>
+                <div id="plan-1-name">Arcade</div>
+                <div id="plan-1-price">$9/mo</div>
+              </div>
+            </div>
+            <div id="plan-2" class="plan">
+              <img src="./assets/images/icon-advanced.svg" alt="advanced">
+              <div>
+                <div id="plan-2-name">Advanced</div>
+                <div id="plan-2-price">$12/mo</div>
+              </div>
+            </div>
+            <div id="plan-3" class="plan">
+              <img src="./assets/images/icon-pro.svg" alt="pro">
+              <div>
+                <div id="plan-3-name">Pro</div>
+                <div id="plan-3-price">$15/mo</div>
+              </div>
+            </div>
+            <div class="switch-container">
+              <h6 id="monthly">Monthly</h6>
+              <label class="switch">
+                <input type="checkbox" name="monthly-plan" id="monthly-plan" onchange="reset();mount(2);">
+                <span class="slider round"></span>
+              </label>
+              <h6 id="yearly" class="inactive-plan-cycle">Yearly</h6>
+            </div>
+          </div>
+          <div class="footer-nav">
+            <button class="back-button" onclick="nextStep(-1)">Go Back</button>
+            <button class="next-button" onclick="nextStep(1)">Next Step</button>
+          </div>
+        </div>
+      </div>
+      <div class="step-details inactive" id="step-content-3">
+        <header class="step-content__header">
+          <h1>Pick add-ons</h1>
+          <div class="step-content__header-description">Add-ons help enhance your gaming experience.</div>
+        </header>
+        <div class="step-content-3__content">
+          <div class="addons">
+            <div id="addon-1" class="addon">
+              <input type="checkbox">
+              <div class="addon-details">
+                <div id="addon-1-name">Online service</div>
+                <div>Access to multiplayer games</div>
+              </div>
+              <div id="addon-1-price" class="addon--price">$9/mo</div>
+            </div>
+            <div id="addon-2" class="addon">
+              <input type="checkbox">
+              <div class="addon-details">
+                <div id="addon-2-name">Larger storage</div>
+                <div>Extra 1TB of cloud save</div>
+              </div>
+              <div id="addon-2-price" class="addon--price">+$2/mo</div>
+            </div>
+            <div id="addon-3" class="addon">
+              <input type="checkbox">
+                <div class="addon-details">
+                  <div id="addon-3-name">Customizable Profile</div>
+                  <div>Custom theme on your profile</div>
+                </div>
+              <div id="addon-3-price" class="addon--price">+$2/mo</div>
+            </div>
+          </div>
+          </form>
+          <div class="footer-nav">
+            <button class="back-button" onclick="nextStep(-1)">Go Back</button>
+            <button class="next-button" onclick="nextStep(1)">Next Step</button>
+          </div>
+        </div>
+      </div>
+      <div class="step-details inactive" id="step-content-4">
+        <header class="step-content__header">
+          <h1>Finishing up</h1>
+          <div class="step-content__header-description">Double-check everything looks OK before confirming.</div>
+        </header>
+        <div class="step-content__content">
+          <div class="summary">
+            <div class="cart-items">
+              <div class="cart-item">
+                <div class="cart-item__plan">
+                  <div id="selected-plan">Arcade(Monthly)</div>
+                  <a href="http://" onclick="event.preventDefault();nextStep(-2);">change</a>
+                </div>
+                <div id="selected-plan-price">$9/mo</div>
+              </div>
+              <hr />
+            </div>
+            <div class="cart-item total">
+              <div>Total(per month)</div>
+              <div>$10/mo</div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-nav">
+          <button class="back-button" onclick="nextStep(-1)">Go Back</button>
+          <button class="next-button" onclick="nextStep(1)">Next Step</button>
+        </div>
+      </div>
+      <div class="step-details inactive" id="step-content-5">
+        <div class="step-content__content thankyou">
+          <img src="./assets/images/icon-thank-you.svg" alt="thankyou">
+          <h1>Thank you!</h1>
+          <p>Thanks for confirming your subscription! We hope you have fun
+            using our platform. If you ever need support, please feel free
+            to email us at support@loremgaming.com.</p>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    </div>
+  </main>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="https://www.linkedin.com/in/souvik-ghosh-57136663/">Souvik Ghosh</a>.
+  </div>
+</body>
+
+</html>
